@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <!-- ====================================================================== -->
+  <!--                                                                        -->
+  <!--  JBoss, the OpenSource J2EE webOS                                      -->
+  <!--                                                                        -->
+  <!--  Distributable under LGPL license.                                     -->
+  <!--  See terms of license at http://www.gnu.org.                           -->
+  <!--                                                                        -->
+  <!-- ====================================================================== -->
+
+  <!-- $Id$ -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>JBossOSGi Bundles - JBoss Reflect</name>
+  <description>A JBossOSGi provided JBoss Reflect bundle</description>
+
+  <groupId>org.jboss.osgi.bundles</groupId>
+  <artifactId>jboss-osgi-reflect</artifactId>
+  <packaging>bundle</packaging>
+
+  <version>2.0.3-SNAPSHOT</version>
+
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss.osgi</groupId>
+    <artifactId>jboss-osgi-parent</artifactId>
+    <version>1.0.4</version>
+  </parent>
+
+  <!-- Subversion -->
+  <scm>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/jboss-reflect/trunk</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/jboss-reflect/trunk</developerConnection>
+    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
+  </scm>
+
+  <!-- Properties -->
+  <properties>
+    <version.javassist>3.9.0.GA</version.javassist>
+    <version.jboss.osgi.common.core>2.2.13.GA</version.jboss.osgi.common.core>
+    <version.jboss.reflect>2.0.2.GA</version.jboss.reflect>
+  </properties>
+
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>biz.aQute</groupId>
+      <artifactId>bnd</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>${version.javassist}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-reflect</artifactId>
+      <version>${version.jboss.reflect}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jboss</groupId>
+          <artifactId>jboss-common-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.bundles</groupId>
+      <artifactId>jboss-osgi-common-core</artifactId>
+      <version>${version.jboss.osgi.common.core}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Import-Package>
+            
+              <!-- import -->
+              org.jboss.logging, 
+              org.jboss.util, 
+              org.jboss.util.collection, 
+              org.jboss.util.propertyeditor,
+              
+              <!-- ignore -->
+              !com.sun.jdi*
+            </Import-Package>
+            <Embed-Dependency>
+              jboss-reflect;inline=false,
+              javassist;inline=false,
+            </Embed-Dependency>
+            <_exportcontents>
+              javassist*;version=${version.javassist},
+              org.jboss.beans.info*;version=${version.jboss.reflect},
+              org.jboss.classadapter.spi*;version=${version.jboss.reflect},
+              org.jboss.config*;version=${version.jboss.reflect},
+              org.jboss.joinpoint*;version=${version.jboss.reflect},
+              org.jboss.reflect.plugins.introspection;version=${version.jboss.reflect},
+              org.jboss.reflect.spi*;version=${version.jboss.reflect},
+            </_exportcontents>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
