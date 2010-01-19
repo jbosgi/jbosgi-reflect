@@ -40,7 +40,7 @@
   <!-- Properties -->
   <properties>
     <version.javassist>3.9.0.GA</version.javassist>
-    <version.jboss.reflect>2.2.0-SNAPSHOT</version.jboss.reflect>
+    <version.jboss.reflect>2.2.0.Alpha2</version.jboss.reflect>
   </properties>
 
   <!-- Dependencies -->
