@@ -9,8 +9,6 @@
   <!--                                                                        -->
   <!-- ====================================================================== -->
 
-  <!-- $Id$ -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -21,13 +19,13 @@
   <artifactId>jboss-osgi-reflect</artifactId>
   <packaging>bundle</packaging>
 
-  <version>2.2.x-SNAPSHOT</version>
+  <version>2.2.0.Alpha9-SNAPSHOT</version>
 
   <!-- Parent -->
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
   </parent>
 
   <!-- Source -->
@@ -40,7 +38,7 @@
   <!-- Properties -->
   <properties>
     <version.javassist>3.9.0.GA</version.javassist>
-    <version.jboss.reflect>2.2.0.Alpha2</version.jboss.reflect>
+    <version.jboss.reflect>2.2.0.Alpha9</version.jboss.reflect>
   </properties>
 
   <!-- Dependencies -->
@@ -57,6 +55,12 @@
     <dependency>
       <groupId>org.jboss</groupId>
       <artifactId>jboss-reflect</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
+        </exclusion>
+      </exclusions>
       <version>${version.jboss.reflect}</version>
     </dependency>
   </dependencies>
@@ -79,6 +83,7 @@
               org.jboss.util.propertyeditor,
               
               <!-- ignore -->
+              !org.jboss.classpool.scoped,
               !com.sun.jdi*
             </Import-Package>
             <Embed-Dependency>
